@@ -7,7 +7,7 @@ class Search extends React.Component {
 
   handleKey = (event) => {
     if(event.key === 'Enter') {
-        this.searchMovies(this.state.search)
+        this.props.searchMovies(this.state.search)
     }
   }
 

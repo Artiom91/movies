@@ -29,10 +29,9 @@ class Main extends React.Component {
 
   render() {
     const { movies } = this.state
-    const { searchMovies } = this.props
     return (
       <main className="container content">
-        <Search  searchMovies={searchMovies}/>
+        <Search  searchMovies={this.searchMovies}/>
         {movies.length > 0 ? (
           <Movies movies={this.state.movies} />
         ) : (
