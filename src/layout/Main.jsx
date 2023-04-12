@@ -9,7 +9,6 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    console.log(process.env)
     fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e009805b&s=batman`)
       .then((response) => response.json())
       .then((data) => this.setState({ movies: data.Search }))
@@ -18,8 +17,8 @@ class Main extends React.Component {
       })
   }
 
-  searchMovies = (str) => {
-    fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e009805b&s=${str}`)
+  searchMovies = (str, type = 'all' ) => {
+    fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e009805b&s=${str}${type !== 'all' ? `&type=${type}` : ''}`)
     .then((response) => response.json())
     .then((data) => this.setState({ movies: data.Search }))
     .catch((err) => {
