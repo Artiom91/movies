@@ -7,7 +7,7 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    return fetch('http://www.omdbapi.com/?i=tt3896198&apikey=e009805b&s=matrix')
+    fetch('http://www.omdbapi.com/?i=tt3896198&apikey=e009805b&s=matrix')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok')
@@ -15,7 +15,7 @@ class Main extends React.Component {
         return response.json()
       })
       .then((data) => {
-        this.setState({movies: data.Search})
+        this.setState({ movies: data.Search })
       })
       .catch((error) => {
         console.error('There was an error:', error)
