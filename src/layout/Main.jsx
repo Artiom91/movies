@@ -1,5 +1,7 @@
 import React from 'react'
 import { Movies } from '../components/Movies'
+import { Preloader } from '../components/Preloader'
+import { Search } from '../components/Search'
 
 class Main extends React.Component {
   state = {
@@ -7,30 +9,34 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://www.omdbapi.com/?i=tt3896198&apikey=e009805b&s=matrix')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok')
-        }
-        return response.json()
+    console.log(process.env)
+    fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e009805b&s=batman`)
+      .then((response) => response.json())
+      .then((data) => this.setState({ movies: data.Search }))
+      .catch((err) => {
+        console.error(err)
       })
-      .then((data) => {
-        this.setState({ movies: data.Search })
-      })
-      .catch((error) => {
-        console.error('There was an error:', error)
-      })
+  }
+
+  searchMovies = (str) => {
+    fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e009805b&s=${str}`)
+    .then((response) => response.json())
+    .then((data) => this.setState({ movies: data.Search }))
+    .catch((err) => {
+      console.error(err)
+    })
   }
 
   render() {
     const { movies } = this.state
-
+    const { searchMovies } = this.props
     return (
       <main className="container content">
-        {movies.length ? (
+        <Search  searchMovies={searchMovies}/>
+        {movies.length > 0 ? (
           <Movies movies={this.state.movies} />
         ) : (
-          <h3>Loading...</h3>
+          <Preloader />
         )}
       </main>
     )

@@ -1,13 +1,13 @@
-import { Movie } from './Movie'
+  import { Movie } from './Movie'
 
-function Movies(props) {
-  const {movies} = props
+  function Movies({movies}) {
 
-  return <div className="movies">
-        {movies.map(movie => (
-            <Movie key={movie.imdbID} {...movie}/>
-        ))}
-        </div>
-}
+    return <> <div className="movies">
+          {movies.map(movie => (
+              <Movie key={movie.imdbID} {...movie}/>
+          ))}
+          </div>
+          </>
+  }
 
-export { Movies }
+  export { Movies }
